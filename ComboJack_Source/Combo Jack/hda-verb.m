@@ -445,16 +445,16 @@ static uint32_t headsetCTIA()
     //alc_headset_mode_ctia
     switch (codecID)
     {
-        case 0x10ec0255:
+        case 0x10ec0256:
             WRITE_COEF(0x45, 0xd489); //Set to CTIA type 
             WRITE_COEF(0x1b, 0x0c2b);
             WRITE_COEFEX(0x57, 0x03, 0x8ea6);
             break;
-        case 0x10ec0256:
-            WRITE_COEF(0x45, 0xd489); //Set to CTIA type 
-            WRITE_COEF(0x1b, 0x0c6b);
-            WRITE_COEFEX(0x57, 0x03, 0x8ea6);
-            break;
+//        case 0x10ec0256:
+//            WRITE_COEF(0x45, 0xd489); //Set to CTIA type
+//            WRITE_COEF(0x1b, 0x0c6b);
+//            WRITE_COEFEX(0x57, 0x03, 0x8ea6);
+//            break;
         case 0x10ec0298:
             UPDATE_COEF(0x8e, 0x0070, 0x0020); // Headset output enable 
             UPDATE_COEF(0x4f, 0xfcc0, 0xd400);
@@ -718,8 +718,8 @@ void alcInit()
     switch (codecID)
     {
         case 0x10ec0256:
-            if (indexOf(xps13SubDev, 3, subDevice) == -1 || subVendor != 0x1028)
-                goto ALC255_COMMON;
+            // if (indexOf(xps13SubDev, 3, subDevice) == -1 || subVendor != 0x1028)
+            //     goto ALC255_COMMON;
             fprintf(stderr, "Fix XPS 13.\n");
             VerbCommand(HDA_VERB(0x19, AC_VERB_SET_PIN_WIDGET_CONTROL, 0x25));
             VerbCommand(HDA_VERB(0x21, AC_VERB_SET_UNSOLICITED_ENABLE, 0x83));
@@ -836,7 +836,7 @@ int main()
 {
     fprintf(stderr, "Starting jack watcher.\n");
     //Allow only one instance
-    if (sem_open("XPS_ComboJack_Watcher", O_CREAT, 600, 1) == SEM_FAILED) 
+    if (sem_open("XPS_ComboJack_Watcher", O_CREAT, 600, 1) == SEM_FAILED)
     {
         fprintf(stderr, "Another instance is already running!\n");
         return 1;
