@@ -1,3 +1,5 @@
+There is Combojack with few workarounds for Matebook 13 2019 (alc 256)
+
 Hackintosh combojack support for alc256/alc255.
 Confirmed to work on dell xps 13 9350/9360(alc256) and Xiaomi Air(i5-7200U, alc255)
 1. Delete CodecCommander.kext，put ComboJack_Installer/VerbStub.kext in Clover/kexts/Other
